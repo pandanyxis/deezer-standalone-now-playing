@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+now-playing.json
+now-playing.json.tmp
+.venv/

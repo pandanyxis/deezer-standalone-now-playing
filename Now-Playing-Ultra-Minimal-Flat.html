@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Now Playing Ultra Minimal Flat</title>
+  <style>
+    :root{--bg:rgba(12,14,18,.92);--stroke:rgba(255,255,255,.07);--text:#f4f7fb;--muted:#9ea8ba;--accent:#c4b5fd;--accent2:#93c5fd;--track:rgba(255,255,255,.11)}
+    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text)}
+    .stage{width:520px;height:112px;padding:10px;display:flex;align-items:center}
+    .panel{width:500px;height:92px;border-radius:14px;overflow:hidden;display:flex;align-items:center;gap:14px;padding:12px;background:var(--bg);border:1px solid var(--stroke)}
+    .art{width:68px;height:68px;flex:none;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1c2430,#131821);border:1px solid rgba(255,255,255,.06)}
+    .art img{width:100%;height:100%;object-fit:cover;display:none}.art.has-image img{display:block}
+    .placeholder{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#1c2430,#131821)} .art.has-image .placeholder{display:none}
+    .placeholder svg{width:24px;height:24px;opacity:.7;color:#d8def0}
+    .content{min-width:0;flex:1;height:100%;display:flex;flex-direction:column;justify-content:center;gap:8px}
+    .title{font-size:17px;font-weight:760;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .artist{margin-top:4px;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .bottom{display:flex;align-items:center;gap:10px}.label{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);flex:none}
+    .track{height:4px;flex:1;border-radius:999px;overflow:hidden;background:var(--track)} .fill{width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .35s linear}
+    .track.indeterminate .fill{width:24%!important;animation:sweep 2.2s ease-in-out infinite}.times{width:68px;flex:none;text-align:right;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .panel.paused .fill{opacity:.55}@keyframes sweep{0%{transform:translateX(-135%)}100%{transform:translateX(360%)}}
+  </style>
+</head>
+<body>
+<div class="stage"><div class="panel" id="panel"><div class="art" id="art"><img id="cover" alt="Album cover"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5a7 7 0 1 0 7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="2.1" fill="currentColor"/></svg></div></div><div class="content"><div><div class="title" id="title">Waiting for music…</div><div class="artist" id="artist">Deezer Standalone</div></div><div class="bottom"><div class="label">Now Playing</div><div class="track indeterminate" id="track"><div class="fill" id="fill"></div></div><div class="times" id="times">— / —</div></div></div></div></div>
+<script src="overlay.js"></script></body></html>
