@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Deezer Standalone Now Playing
 // @namespace    https://github.com/pandanyxis/deezer-standalone-now-playing
-// @version      2.1.0
+// @version      2.1.1
 // @description  Send Deezer song information to a standalone local overlay without OBS or Tuna.
 // @author       pandanyxis (standalone adaptation); univrsal; Kıraç Armağan Önal
 // @homepageURL  https://github.com/pandanyxis/deezer-standalone-now-playing
@@ -23,7 +23,7 @@
     'use strict';
     const endpoint = 'http://127.0.0.1:1610/update';
     const badge = document.createElement('div');
-    badge.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:2147483647;padding:10px 14px;border-radius:8px;background:#171923;color:white;font:12px Arial;max-width:360px;white-space:pre-wrap;box-shadow:0 2px 12px #0008';
+    badge.style.cssText = 'position:fixed;top:12px;right:12px;pointer-events:none;user-select:none;z-index:2147483647;padding:10px 14px;border-radius:8px;background:#171923;color:white;font:12px Arial;max-width:360px;white-space:pre-wrap;box-shadow:0 2px 12px #0008';
     badge.textContent = 'Deezer Standalone: script started…';
     document.documentElement.appendChild(badge);
     const show = message => { badge.textContent = 'Deezer Standalone: ' + message; };
