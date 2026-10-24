@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Deezer Standalone Now Playing
 // @namespace    https://github.com/pandanyxis/deezer-standalone-now-playing
-// @version      2.1.1
+// @version      2.1.2
 // @description  Send Deezer song information to a standalone local overlay without OBS or Tuna.
 // @author       pandanyxis (standalone adaptation); univrsal; Kıraç Armağan Önal
 // @homepageURL  https://github.com/pandanyxis/deezer-standalone-now-playing
@@ -21,12 +21,14 @@
  */
 (() => {
     'use strict';
+    // Enable only when troubleshooting connection or metadata issues.
+    const DEBUG = false;
     const endpoint = 'http://127.0.0.1:1610/update';
     const badge = document.createElement('div');
     badge.style.cssText = 'position:fixed;top:12px;right:12px;pointer-events:none;user-select:none;z-index:2147483647;padding:10px 14px;border-radius:8px;background:#171923;color:white;font:12px Arial;max-width:360px;white-space:pre-wrap;box-shadow:0 2px 12px #0008';
     badge.textContent = 'Deezer Standalone: script started…';
-    document.documentElement.appendChild(badge);
-    const show = message => { badge.textContent = 'Deezer Standalone: ' + message; };
+    if (DEBUG) document.documentElement.appendChild(badge);
+    const show = message => { if (DEBUG) badge.textContent = 'Deezer Standalone: ' + message; };
     let busy = false, retryAt = 0;
     function read() {
         const nav = typeof unsafeWindow !== 'undefined' ? unsafeWindow.navigator : navigator;
@@ -55,7 +57,7 @@
             busy = false; retryAt = Date.now() + 10000;
             const detail = typeof reason === 'string' ? reason : reason?.error || reason?.message || 'connection refused or local access permission missing';
             show('update failed\n' + detail + '\nRetrying in 10 seconds');
-            console.warn('[Deezer Standalone]', reason);
+            if (DEBUG) console.warn('[Deezer Standalone]', reason);
         };
         try {
         const data = read();
@@ -74,7 +76,7 @@
                 const request = GM.xmlHttpRequest(options);
                 if (request?.catch) request.catch(fail);
             } else fail('No userscript request API available. Check your extension.');
-        } catch (error) { fail(error); console.warn('[Deezer Standalone]', error); }
+        } catch (error) { fail(error); }
     }
     setInterval(tick, 1000);
     tick();
